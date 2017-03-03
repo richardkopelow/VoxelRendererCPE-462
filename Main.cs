@@ -16,5 +16,22 @@ namespace VoxelRendererCPE_462
         {
             InitializeComponent();
         }
+
+        Camera cam;
+        Voxelmap voxmap;
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+            cam = new Camera();
+
+            voxmap = new Voxelmap(1, 1, 1);
+            voxmap[0, 0, 0] = Color.Green;
+        }
+
+        private void RenderClock_Tick(object sender, EventArgs e)
+        {
+            RenderFrame.Image = cam.Render(voxmap);
+        }
+        
     }
 }
