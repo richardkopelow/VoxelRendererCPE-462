@@ -26,12 +26,25 @@ namespace VoxelRendererCPE_462
 
             voxmap = new Voxelmap(1, 1, 1);
             voxmap[0, 0, 0] = Color.Green;
+
+            OrthographicSizeBox.Value = (decimal)cam.OrthographicSize;
         }
 
-        private void RenderClock_Tick(object sender, EventArgs e)
+        private void OrthographicSizeBox_ValueChanged(object sender, EventArgs e)
+        {
+            cam.OrthographicSize = (int)OrthographicSizeBox.Value;
+        }
+
+        private void BitmapResolutionChanged(object sender, EventArgs e)
+        {
+            cam.Width = (int)BitmapWidthBox.Value;
+            cam.Height = (int)BitmapHeightBox.Value;
+            cam.UpdateBitmap();
+        }
+
+        private void RenderButton_Click(object sender, EventArgs e)
         {
             RenderFrame.Image = cam.Render(voxmap);
         }
-        
     }
 }

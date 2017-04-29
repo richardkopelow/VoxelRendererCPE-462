@@ -11,12 +11,15 @@ namespace VoxelRendererCPE_462
     {
         public Vector3 Position { get; set; }
         public Color Background { get; set; }
-        public int PixelsPerUnit { get; set; }
+        public int Height { get; set; }
+        public int Width { get; set; }
+        public float PixelsPerUnit { get { return Height / OrthographicSize; } }
         public float OrthographicSize { get; set; }
         public float RayStep { get; set; }
 
         private Bitmap image;
         private List<Vector3I> hitVoxels;
+        private bool bitmapNeedsUpdate;
 
         Vector3 lookDirection = new Vector3(0, 0, 1);//this will be replaces
 
@@ -24,15 +27,20 @@ namespace VoxelRendererCPE_462
         {
             Position = new Vector3(0f, 0f, -1f);
             Background = Color.Red;
-            PixelsPerUnit = 40;
+            Height = 256;
+            Width = 256;
             OrthographicSize = 3;
             RayStep = 0.5f;
-            image = new Bitmap((int)(OrthographicSize * PixelsPerUnit), (int)(OrthographicSize * PixelsPerUnit));
-            hitVoxels = new List<Vector3I>(5000);
+            image = new Bitmap(Height, Width);
+            hitVoxels = new List<Vector3I>(200);
         }
 
         public Bitmap Render(Voxelmap map)
         {
+            if (bitmapNeedsUpdate)
+            {
+                image = new Bitmap(Height, Width);
+            }
             Vector3 rayStep = lookDirection * RayStep;
             float rayMaxLength = 10;//quickly set so that I can test the render;
             for (int bitmapX = 0; bitmapX < image.Width; bitmapX++)
@@ -40,7 +48,7 @@ namespace VoxelRendererCPE_462
                 for (int bitmapY = 0; bitmapY < image.Height; bitmapY++)
                 {
                     hitVoxels.Clear();
-                    Vector3 rayPoint = new Vector3(bitmapX / (float)PixelsPerUnit, bitmapY / (float)PixelsPerUnit, 0) + Position;
+                    Vector3 rayPoint = new Vector3(bitmapX / PixelsPerUnit, bitmapY / PixelsPerUnit, 0) + Position;
                     rayPoint = rayPoint - new Vector3(OrthographicSize / 2, OrthographicSize / 2, 0);
                     while ((rayPoint - Position).Magnitude < rayMaxLength)
                     {
@@ -72,6 +80,11 @@ namespace VoxelRendererCPE_462
             }
 
             return image;
+        }
+
+        public void UpdateBitmap()
+        {
+            bitmapNeedsUpdate = true;
         }
     }
 }
