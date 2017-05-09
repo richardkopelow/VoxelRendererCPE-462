@@ -24,10 +24,13 @@ namespace VoxelRendererCPE_462
         {
             cam = new Camera();
 
-            voxmap = new Voxelmap(1, 1, 1);
+            voxmap = new Voxelmap(2, 2, 2);
             voxmap[0, 0, 0] = Color.Green;
+            voxmap[0, 1, 0] = Color.Blue;
+            voxmap[1, 0, 0] = Color.Red;
 
             OrthographicSizeBox.Value = (decimal)cam.OrthographicSize;
+            RenderFrame.Image = cam.Render(voxmap);
         }
 
         private void OrthographicSizeBox_ValueChanged(object sender, EventArgs e)

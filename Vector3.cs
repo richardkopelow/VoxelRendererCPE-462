@@ -26,6 +26,14 @@ namespace VoxelRendererCPE_462
                 return (float)Math.Sqrt(X * X + Y * Y + Z * Z);
             }
         }
+        public Vector3 Normalized
+        {
+            get
+            {
+                float mag = Magnitude;
+                return new Vector3(X / mag, Y / mag, Z / mag);
+            }
+        }
 
         public static Vector3 operator +(Vector3 a, Vector3 b)
         {
@@ -36,6 +44,10 @@ namespace VoxelRendererCPE_462
             return new Vector3(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
         }
         public static Vector3 operator *(Vector3 a, float b)
+        {
+            return new Vector3(a.X * b, a.Y * b, a.Z * b);
+        }
+        public static Vector3 operator *(float b, Vector3 a)
         {
             return new Vector3(a.X * b, a.Y * b, a.Z * b);
         }
