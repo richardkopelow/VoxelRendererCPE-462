@@ -9,12 +9,18 @@ namespace VoxelRendererCPE_462
 {
     class Camera
     {
+        public enum RenderModeEnum
+        {
+            MIP,
+            Color
+        }
         public Vector3 Position { get; set; }
         public Color Background { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
         public float PixelsPerUnit { get { return Height / OrthographicSize; } }
         public float OrthographicSize { get; set; }
+        public RenderModeEnum RenderMode { get; set; }
         public float RayStep { get; set; }
         public Vector3 Forward
         {
@@ -55,6 +61,7 @@ namespace VoxelRendererCPE_462
             Height = 256;
             Width = 256;
             OrthographicSize = 3;
+            RenderMode = RenderModeEnum.Color;
             RayStep = 0.05f;
             image = new Bitmap(Height, Width);
             hitVoxels = new List<Vector3I>(200);
@@ -89,17 +96,38 @@ namespace VoxelRendererCPE_462
                         }
                         rayPoint = rayPoint + rayStep;
                     }
-                    Color col = Background;
-                    for (int i = hitVoxels.Count - 1; i >= 0; i--)
+                    switch (RenderMode)
                     {
-                        float alpha = map[hitVoxels[i].X, hitVoxels[i].Y, hitVoxels[i].Z].A / 255f;
-                        col = Color.FromArgb(
-                            (int)(col.R * (1 - alpha) + (int)(map[hitVoxels[i].X, hitVoxels[i].Y, hitVoxels[i].Z].R * alpha)),
-                            (int)(col.G * (1 - alpha) + (int)(map[hitVoxels[i].X, hitVoxels[i].Y, hitVoxels[i].Z].G * alpha)),
-                            (int)(col.B * (1 - alpha) + (int)(map[hitVoxels[i].X, hitVoxels[i].Y, hitVoxels[i].Z].B * alpha))
-                            );
+                        case RenderModeEnum.MIP:
+                            float intensity = 0;
+                            for (int i = 0; i < hitVoxels.Count; i++)
+                            {
+                                Color voxCol = map[hitVoxels[i].X, hitVoxels[i].Y, hitVoxels[i].Z];
+                                float voxInten = voxCol.GetBrightness();
+                                if (voxInten>intensity)
+                                {
+                                    intensity = voxInten;
+                                }
+                            }
+                            int colorVal = (int)(255*intensity);
+                            image.SetPixel(bitmapX, bitmapY, Color.FromArgb(colorVal, colorVal, colorVal));
+                            break;
+                        case RenderModeEnum.Color:
+                            Color col = Background;
+                            for (int i = hitVoxels.Count - 1; i >= 0; i--)
+                            {
+                                float alpha = map[hitVoxels[i].X, hitVoxels[i].Y, hitVoxels[i].Z].A / 255f;
+                                col = Color.FromArgb(
+                                    (int)(col.R * (1 - alpha) + (int)(map[hitVoxels[i].X, hitVoxels[i].Y, hitVoxels[i].Z].R * alpha)),
+                                    (int)(col.G * (1 - alpha) + (int)(map[hitVoxels[i].X, hitVoxels[i].Y, hitVoxels[i].Z].G * alpha)),
+                                    (int)(col.B * (1 - alpha) + (int)(map[hitVoxels[i].X, hitVoxels[i].Y, hitVoxels[i].Z].B * alpha))
+                                    );
+                            }
+                            image.SetPixel(bitmapX, bitmapY, col);
+                            break;
+                        default:
+                            break;
                     }
-                    image.SetPixel(bitmapX, bitmapY, col);
                 }
             }
 

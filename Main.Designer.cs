@@ -36,6 +36,7 @@ namespace VoxelRendererCPE_462
             this.BitmapWidthBox = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.RenderButton = new System.Windows.Forms.Button();
+            this.MIPCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.RenderFrame)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OrthographicSizeBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BitmapHeightBox)).BeginInit();
@@ -135,11 +136,23 @@ namespace VoxelRendererCPE_462
             this.RenderButton.UseVisualStyleBackColor = true;
             this.RenderButton.Click += new System.EventHandler(this.RenderButton_Click);
             // 
+            // MIPCheckBox
+            // 
+            this.MIPCheckBox.AutoSize = true;
+            this.MIPCheckBox.Location = new System.Drawing.Point(13, 171);
+            this.MIPCheckBox.Name = "MIPCheckBox";
+            this.MIPCheckBox.Size = new System.Drawing.Size(83, 17);
+            this.MIPCheckBox.TabIndex = 9;
+            this.MIPCheckBox.Text = "MIP Render";
+            this.MIPCheckBox.UseVisualStyleBackColor = true;
+            this.MIPCheckBox.CheckedChanged += new System.EventHandler(this.MIPCheckBox_CheckedChanged);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(557, 461);
+            this.Controls.Add(this.MIPCheckBox);
             this.Controls.Add(this.RenderButton);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.BitmapWidthBox);
@@ -170,6 +183,7 @@ namespace VoxelRendererCPE_462
         private System.Windows.Forms.NumericUpDown BitmapWidthBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button RenderButton;
+        private System.Windows.Forms.CheckBox MIPCheckBox;
     }
 }
 
