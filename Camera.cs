@@ -22,32 +22,31 @@ namespace VoxelRendererCPE_462
         public float OrthographicSize { get; set; }
         public RenderModeEnum RenderMode { get; set; }
         public float RayStep { get; set; }
+        public float Pitch { get; set; }
+        public float Yaw { get; set; }
         public Vector3 Forward
         {
             get
             {
-                //TODO: Alex will make this return a vector that points Forward based on camera rotation
-                return new Vector3(1, -1, 1).Normalized;
-                //return new Vector3(0,0,1);
-            }
+                return new Vector3((float)Math.Cos(Yaw) * (float)Math.Cos(Pitch), (float)Math.Sin(Pitch), (float)Math.Sin(Yaw) * (float)Math.Cos(Pitch)).Normalized;
+                //return new Vector3(0,0,1);
+            }
         }
         public Vector3 Up
         {
             get
             {
-                //TODO: Alex will make this return a vector that points Up based on camera rotation
-                return new Vector3(1, 1, 1).Normalized;
-                //return new Vector3(0, 1, 0);
-            }
+                return -1 * new Vector3((float)Math.Cos(Yaw) * (float)Math.Sin(Pitch), -(float)Math.Sin(Yaw) * (float)Math.Sin(Yaw) * (float)Math.Cos(Pitch) - (float)Math.Cos(Yaw) * (float)Math.Cos(Pitch) * (float)Math.Cos(Yaw), (float)Math.Sin(Yaw) * (float)Math.Sin(Pitch)).Normalized;
+                //return new Vector3(0, 1, 0);
+            }
         }
         public Vector3 Right
         {
             get
             {
-                //TODO: Alex will make this return a vector that points Right based on camera rotation
-                return new Vector3(1, 0, -1).Normalized;
-                //return new Vector3(1, 0, 0);
-            }
+                return -1 * new Vector3((float)Math.Sin(Yaw), 0, -(float)Math.Cos(Yaw)).Normalized;
+                //return new Vector3(1, 0, 0);
+            }
         }
 
         private Bitmap image;
@@ -64,6 +63,8 @@ namespace VoxelRendererCPE_462
             RenderMode = RenderModeEnum.Color;
             RayStep = 0.05f;
             image = new Bitmap(Height, Width);
+            Pitch = (float)Math.PI / 4;
+            Yaw = (float)Math.PI / 4;
             hitVoxels = new List<Vector3I>(200);
         }
 

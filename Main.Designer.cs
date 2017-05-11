@@ -41,11 +41,24 @@ namespace VoxelRendererCPE_462
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openVoxelmapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CamXBox = new System.Windows.Forms.NumericUpDown();
+            this.CamYBox = new System.Windows.Forms.NumericUpDown();
+            this.CamZBox = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.PitchBox = new System.Windows.Forms.NumericUpDown();
+            this.YawBox = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.RenderFrame)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OrthographicSizeBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BitmapHeightBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BitmapWidthBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CamXBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CamYBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CamZBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PitchBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.YawBox)).BeginInit();
             this.SuspendLayout();
             // 
             // RenderFrame
@@ -187,11 +200,121 @@ namespace VoxelRendererCPE_462
             this.openVoxelmapToolStripMenuItem.Text = "Open Voxelmap";
             this.openVoxelmapToolStripMenuItem.Click += new System.EventHandler(this.openVoxelmapToolStripMenuItem_Click);
             // 
+            // CamXBox
+            // 
+            this.CamXBox.DecimalPlaces = 3;
+            this.CamXBox.Location = new System.Drawing.Point(13, 229);
+            this.CamXBox.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.CamXBox.Name = "CamXBox";
+            this.CamXBox.Size = new System.Drawing.Size(38, 20);
+            this.CamXBox.TabIndex = 12;
+            // 
+            // CamYBox
+            // 
+            this.CamYBox.DecimalPlaces = 3;
+            this.CamYBox.Location = new System.Drawing.Point(58, 229);
+            this.CamYBox.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.CamYBox.Name = "CamYBox";
+            this.CamYBox.Size = new System.Drawing.Size(38, 20);
+            this.CamYBox.TabIndex = 13;
+            // 
+            // CamZBox
+            // 
+            this.CamZBox.DecimalPlaces = 3;
+            this.CamZBox.Location = new System.Drawing.Point(110, 229);
+            this.CamZBox.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.CamZBox.Name = "CamZBox";
+            this.CamZBox.Size = new System.Drawing.Size(38, 20);
+            this.CamZBox.TabIndex = 14;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(13, 213);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(83, 13);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Camera Position";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(10, 265);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(31, 13);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "Pitch";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(10, 304);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(28, 13);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Yaw";
+            // 
+            // PitchBox
+            // 
+            this.PitchBox.DecimalPlaces = 2;
+            this.PitchBox.Location = new System.Drawing.Point(12, 281);
+            this.PitchBox.Maximum = new decimal(new int[] {
+            720,
+            0,
+            0,
+            0});
+            this.PitchBox.Minimum = new decimal(new int[] {
+            720,
+            0,
+            0,
+            -2147483648});
+            this.PitchBox.Name = "PitchBox";
+            this.PitchBox.Size = new System.Drawing.Size(146, 20);
+            this.PitchBox.TabIndex = 18;
+            // 
+            // YawBox
+            // 
+            this.YawBox.DecimalPlaces = 2;
+            this.YawBox.Location = new System.Drawing.Point(12, 320);
+            this.YawBox.Maximum = new decimal(new int[] {
+            720,
+            0,
+            0,
+            0});
+            this.YawBox.Minimum = new decimal(new int[] {
+            720,
+            0,
+            0,
+            -2147483648});
+            this.YawBox.Name = "YawBox";
+            this.YawBox.Size = new System.Drawing.Size(146, 20);
+            this.YawBox.TabIndex = 19;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(557, 461);
+            this.Controls.Add(this.YawBox);
+            this.Controls.Add(this.PitchBox);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.CamZBox);
+            this.Controls.Add(this.CamYBox);
+            this.Controls.Add(this.CamXBox);
             this.Controls.Add(this.SaveRenderButton);
             this.Controls.Add(this.MIPCheckBox);
             this.Controls.Add(this.RenderButton);
@@ -213,6 +336,11 @@ namespace VoxelRendererCPE_462
             ((System.ComponentModel.ISupportInitialize)(this.BitmapWidthBox)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CamXBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CamYBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CamZBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PitchBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.YawBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -233,6 +361,14 @@ namespace VoxelRendererCPE_462
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openVoxelmapToolStripMenuItem;
+        private System.Windows.Forms.NumericUpDown CamXBox;
+        private System.Windows.Forms.NumericUpDown CamYBox;
+        private System.Windows.Forms.NumericUpDown CamZBox;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown PitchBox;
+        private System.Windows.Forms.NumericUpDown YawBox;
     }
 }
 
