@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,6 +59,49 @@ namespace VoxelRendererCPE_462
                 return false;
             }
             return true;
+        }
+        public void Load(string filename)
+        {
+            using (StreamReader sr = new StreamReader(filename))
+            {
+                string file = sr.ReadToEnd();
+                string[] lines = file.Split('\n');
+                Width = int.Parse(lines[0]);
+                Height = int.Parse(lines[1]);
+                Depth = int.Parse(lines[2]);
+
+                voxels = new Color[Width, Height, Depth];
+                for (int i = 0; i < Width; i++)
+                {
+                    for (int j = 0; j < Height; j++)
+                    {
+                        for (int k = 0; k < Depth; k++)
+                        {
+                            voxels[i, j, k] = Color.FromArgb(int.Parse(lines[k+j*Depth+i*Depth*Height+3]));
+                        }
+                    }
+                }
+            }
+        }
+        public void Save(string filename)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("{0}\n{1}\n{2}",Width,Height,Depth);
+            for (int i = 0; i < Width; i++)
+            {
+                for (int j = 0; j < Height; j++)
+                {
+                    for (int k = 0; k < Depth; k++)
+                    {
+                        sb.Append('\n');
+                        sb.Append(voxels[i, j, k].ToArgb());
+                    }
+                }
+            }
+            using (StreamWriter sw = new StreamWriter(filename))
+            {
+                sw.Write(sb.ToString());
+            }
         }
     }
 }

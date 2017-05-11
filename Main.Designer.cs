@@ -37,10 +37,15 @@ namespace VoxelRendererCPE_462
             this.label3 = new System.Windows.Forms.Label();
             this.RenderButton = new System.Windows.Forms.Button();
             this.MIPCheckBox = new System.Windows.Forms.CheckBox();
+            this.SaveRenderButton = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openVoxelmapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.RenderFrame)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OrthographicSizeBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BitmapHeightBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BitmapWidthBox)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // RenderFrame
@@ -147,11 +152,47 @@ namespace VoxelRendererCPE_462
             this.MIPCheckBox.UseVisualStyleBackColor = true;
             this.MIPCheckBox.CheckedChanged += new System.EventHandler(this.MIPCheckBox_CheckedChanged);
             // 
+            // SaveRenderButton
+            // 
+            this.SaveRenderButton.Location = new System.Drawing.Point(13, 427);
+            this.SaveRenderButton.Name = "SaveRenderButton";
+            this.SaveRenderButton.Size = new System.Drawing.Size(146, 23);
+            this.SaveRenderButton.TabIndex = 10;
+            this.SaveRenderButton.Text = "Save Render";
+            this.SaveRenderButton.UseVisualStyleBackColor = true;
+            this.SaveRenderButton.Click += new System.EventHandler(this.SaveRenderButton_Click);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(557, 24);
+            this.menuStrip1.TabIndex = 11;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openVoxelmapToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // openVoxelmapToolStripMenuItem
+            // 
+            this.openVoxelmapToolStripMenuItem.Name = "openVoxelmapToolStripMenuItem";
+            this.openVoxelmapToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.openVoxelmapToolStripMenuItem.Text = "Open Voxelmap";
+            this.openVoxelmapToolStripMenuItem.Click += new System.EventHandler(this.openVoxelmapToolStripMenuItem_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(557, 461);
+            this.Controls.Add(this.SaveRenderButton);
             this.Controls.Add(this.MIPCheckBox);
             this.Controls.Add(this.RenderButton);
             this.Controls.Add(this.label3);
@@ -161,6 +202,8 @@ namespace VoxelRendererCPE_462
             this.Controls.Add(this.OrthographicSizeBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.RenderFrame);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Main";
             this.Text = "Voxel Renderer";
             this.Load += new System.EventHandler(this.Main_Load);
@@ -168,6 +211,8 @@ namespace VoxelRendererCPE_462
             ((System.ComponentModel.ISupportInitialize)(this.OrthographicSizeBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BitmapHeightBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BitmapWidthBox)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -184,6 +229,10 @@ namespace VoxelRendererCPE_462
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button RenderButton;
         private System.Windows.Forms.CheckBox MIPCheckBox;
+        private System.Windows.Forms.Button SaveRenderButton;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openVoxelmapToolStripMenuItem;
     }
 }
 

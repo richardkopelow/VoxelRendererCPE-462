@@ -25,10 +25,6 @@ namespace VoxelRendererCPE_462
             cam = new Camera();
 
             voxmap = new Voxelmap(2, 2, 2);
-            voxmap[0, 0, 0] = Color.Green;
-            voxmap[0, 1, 0] = Color.Blue;
-            voxmap[1, 0, 0] = Color.Red;
-            voxmap[0, 0, 1] = Color.Red;
 
             OrthographicSizeBox.Value = (decimal)cam.OrthographicSize;
             MIPCheckBox.Checked = cam.RenderMode == Camera.RenderModeEnum.MIP;
@@ -55,6 +51,24 @@ namespace VoxelRendererCPE_462
         private void MIPCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             cam.RenderMode = MIPCheckBox.Checked ? Camera.RenderModeEnum.MIP : Camera.RenderModeEnum.Color;
+        }
+
+        private void SaveRenderButton_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            if (sfd.ShowDialog()== DialogResult.OK)
+            {
+                RenderFrame.Image.Save(sfd.FileName);
+            }
+        }
+
+        private void openVoxelmapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog()== DialogResult.OK)
+            {
+                voxmap.Load(ofd.FileName);
+            }
         }
     }
 }

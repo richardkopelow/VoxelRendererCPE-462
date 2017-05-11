@@ -27,7 +27,7 @@ namespace VoxelRendererCPE_462
             get
             {
                 //TODO: Alex will make this return a vector that points Forward based on camera rotation
-                return new Vector3(1, 0, 1).Normalized;
+                return new Vector3(1, -1, 1).Normalized;
                 //return new Vector3(0,0,1);
             }
         }
@@ -36,7 +36,7 @@ namespace VoxelRendererCPE_462
             get
             {
                 //TODO: Alex will make this return a vector that points Up based on camera rotation
-                return new Vector3(0, 1, 0).Normalized;
+                return new Vector3(1, 1, 1).Normalized;
                 //return new Vector3(0, 1, 0);
             }
         }
@@ -56,7 +56,7 @@ namespace VoxelRendererCPE_462
 
         public Camera()
         {
-            Position = new Vector3(-1f, 0f, -1f);
+            Position = new Vector3(-1f, 1f, -1f);
             Background = Color.Black;
             Height = 256;
             Width = 256;
@@ -104,23 +104,25 @@ namespace VoxelRendererCPE_462
                             {
                                 Color voxCol = map[hitVoxels[i].X, hitVoxels[i].Y, hitVoxels[i].Z];
                                 float voxInten = voxCol.GetBrightness();
-                                if (voxInten>intensity)
+                                if (voxInten > intensity)
                                 {
                                     intensity = voxInten;
                                 }
                             }
-                            int colorVal = (int)(255*intensity);
+                            int colorVal = (int)(255 * intensity);
                             image.SetPixel(bitmapX, bitmapY, Color.FromArgb(colorVal, colorVal, colorVal));
                             break;
                         case RenderModeEnum.Color:
                             Color col = Background;
                             for (int i = hitVoxels.Count - 1; i >= 0; i--)
                             {
-                                float alpha = map[hitVoxels[i].X, hitVoxels[i].Y, hitVoxels[i].Z].A / 255f;
+                                Vector3I cords = hitVoxels[i];
+                                Color voxCol = map[cords.X, cords.Y, cords.Z];
+                                float alpha = voxCol.A / 255f;
                                 col = Color.FromArgb(
-                                    (int)(col.R * (1 - alpha) + (int)(map[hitVoxels[i].X, hitVoxels[i].Y, hitVoxels[i].Z].R * alpha)),
-                                    (int)(col.G * (1 - alpha) + (int)(map[hitVoxels[i].X, hitVoxels[i].Y, hitVoxels[i].Z].G * alpha)),
-                                    (int)(col.B * (1 - alpha) + (int)(map[hitVoxels[i].X, hitVoxels[i].Y, hitVoxels[i].Z].B * alpha))
+                                    (int)(col.R * (1 - alpha) + (int)(voxCol.R * alpha)),
+                                    (int)(col.G * (1 - alpha) + (int)(voxCol.G * alpha)),
+                                    (int)(col.B * (1 - alpha) + (int)(voxCol.B * alpha))
                                     );
                             }
                             image.SetPixel(bitmapX, bitmapY, col);
